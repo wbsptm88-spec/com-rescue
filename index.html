@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>컴맹 구조대 - AI 중고 PC 감정사</title>
-    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #0284c7;
+            --primary-color: #0369a1;
+            --primary-light: #0ea5e9;
             --bg-light: #f8fafc;
             --card-bg: #ffffff;
             --text-dark: #1e293b;
@@ -18,64 +19,154 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* 기본 본문 전체 폰트는 깔끔하고 센스 있는 Noto Sans KR 적용 */
         body { background-color: var(--bg-light); color: var(--text-dark); font-family: 'Noto Sans KR', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow-x: hidden; position: relative; }
         
         .container { width: 90%; max-width: 700px; z-index: 10; margin: 20px auto; }
         
-        /* 만화 스타일 로고 및 헤더 */
         header { text-align: center; margin-bottom: 30px; position: relative; }
-        .logo-container { display: inline-block; position: relative; margin-bottom: 10px; }
-        .tube-graphic { font-size: 4rem; display: inline-block; animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(5deg); } }
+        .logo-container { display: inline-block; position: relative; margin-bottom: 15px; }
         
-        header h1 { font-family: 'Jua', sans-serif; font-size: 3rem; color: var(--primary-color); text-shadow: 3px 3px 0px #e0f2fe; margin-top: 5px; }
-        header p { color: var(--text-muted); font-size: 1.1rem; font-weight: 500; }
+        /* 🛟 로고 메인 튜브 */
+        .cartoon-tube {
+            display: inline-block;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: 4px solid var(--text-dark);
+            background: radial-gradient(circle at 65% 35%, #ffffff 12%, #ef4444 13%, #ef4444 38%, #ffffff 39%, #ffffff 62%, #ef4444 63%);
+            box-shadow: 0 8px 16px rgba(3, 105, 161, 0.15);
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+            vertical-align: middle;
+        }
+        .cartoon-tube::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 27px;
+            height: 27px;
+            background-color: var(--bg-light);
+            border: 4px solid var(--text-dark);
+            border-radius: 50%;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(8deg); } }
+        
+        /* 큰 타이틀과 강조 섹션에만 개성 있는 Jua 폰트 배치 */
+        header h1 { font-family: 'Jua', sans-serif; font-size: 3.2rem; color: var(--text-dark); letter-spacing: -1px; margin-top: 5px; }
+        header h1 span { color: var(--primary-color); }
+        header p { color: var(--text-muted); font-size: 1.1rem; font-weight: 500; margin-top: 8px; }
 
-        /* 화이트 테마 대시보드 카드 */
-        .card { background: var(--card-bg); padding: 30px; border-radius: 24px; box-shadow: 0 10px 25px rgba(2, 132, 199, 0.08); border: 2px solid #e2e8f0; margin-bottom: 25px; transition: all 0.3s ease; }
-        textarea { width: 100%; height: 180px; background: #f1f5f9; border: 2px solid #cbd5e1; border-radius: 16px; padding: 15px; color: var(--text-dark); font-size: 1rem; resize: none; outline: none; transition: all 0.3s; font-weight: 500; }
-        textarea:focus { border-color: var(--primary-color); background: #ffffff; box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15); }
+        .card { background: var(--card-bg); padding: 30px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); border: 1px solid #e2e8f0; margin-bottom: 25px; transition: all 0.3s ease; }
+        textarea { width: 100%; height: 180px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 16px; padding: 18px; color: var(--text-dark); font-size: 1rem; font-family: 'Noto Sans KR', sans-serif; resize: none; outline: none; transition: all 0.3s; font-weight: 500; line-height: 1.6; }
+        textarea:focus { border-color: var(--primary-color); background: #ffffff; box-shadow: 0 0 0 4px rgba(3, 105, 161, 0.12); }
         
-        .btn { width: 100%; background: #0284c7; color: white; border: none; padding: 18px; border-radius: 16px; font-size: 1.3rem; font-family: 'Jua', sans-serif; cursor: pointer; transition: all 0.2s; margin-top: 15px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2); }
-        .btn:hover { background: #0369a1; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(2, 132, 199, 0.3); }
+        .btn { width: 100%; background: linear-gradient(135deg, var(--primary-color), #025a8b); color: white; border: none; padding: 18px; border-radius: 16px; font-size: 1.3rem; font-family: 'Jua', sans-serif; cursor: pointer; transition: all 0.2s; margin-top: 15px; box-shadow: 0 4px 14px rgba(3, 105, 161, 0.25); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(3, 105, 161, 0.35); }
         .btn:active { transform: translateY(1px); }
 
-        /* 로딩 컨테이너 */
-        .loading-box { display: none; text-align: center; padding: 40px 20px; }
-        .spinner { width: 50px; height: 50px; border: 5px solid #e2e8f0; border-top: 5px solid var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .progress-container { width: 100%; background: #e2e8f0; height: 12px; border-radius: 6px; margin-top: 20px; overflow: hidden; }
-        .progress-bar { width: 0%; height: 100%; background: var(--primary-color); transition: width 0.1s linear; }
+        /* 🛠️ 교정: 버튼 내부 미니 튜브에 명확한 검은색 테두리 라인 적용 */
+        .mini-tube {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #1e293b;
+            background: radial-gradient(circle at 65% 35%, #ffffff 10%, #ef4444 11%, #ef4444 35%, #ffffff 36%, #ffffff 60%, #ef4444 61%);
+            position: relative;
+        }
+        .mini-tube::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary-color);
+            border: 2px solid #1e293b;
+            border-radius: 50%;
+        }
 
-        /* 결과 화면 디자인 */
+        .loading-box { display: none; text-align: center; padding: 45px 20px; }
+        
+        /* 🌊 튜브/배 없이 오롯이 물결이 일렁이며 가득 차오르는 게이지 바 */
+        .progress-container { 
+            width: 100%; 
+            background: #e2e8f0; 
+            height: 28px; 
+            border-radius: 30px; 
+            overflow: hidden; 
+            position: relative;
+            margin-top: 25px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.08);
+        }
+        .progress-bar { 
+            width: 0%; 
+            height: 100%; 
+            background: linear-gradient(90deg, #0284c7, #0ea5e9); 
+            transition: width 0.1s linear; 
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        
+        /* 게이지 가득 채우는 실시간 일렁이는 파도 애니메이션 효과 */
+        .progress-bar::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(
+                -45deg, 
+                rgba(255, 255, 255, 0.18) 25%, 
+                transparent 25%, 
+                transparent 50%, 
+                rgba(255, 255, 255, 0.18) 50%, 
+                rgba(255, 255, 255, 0.18) 75%, 
+                transparent 75%, 
+                transparent
+            );
+            background-size: 35px 35px;
+            animation: waveMove 1s linear infinite;
+        }
+        @keyframes waveMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 35px 0; }
+        }
+
         .result-box { display: none; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
         .spec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
-        .spec-item { background: var(--card-bg); padding: 20px; border-radius: 18px; text-align: center; border: 2px solid #e2e8f0; border-bottom: 5px solid var(--primary-color); }
-        .spec-item span { display: block; font-size: 0.9rem; color: var(--text-muted); font-weight: bold; margin-bottom: 5px; }
-        .spec-item strong { font-size: 1.1rem; color: var(--text-dark); word-break: break-all; }
+        .spec-item { background: var(--card-bg); padding: 20px; border-radius: 18px; text-align: center; border: 1px solid #e2e8f0; border-bottom: 4px solid var(--primary-color); }
+        .spec-item span { display: block; font-size: 0.85rem; color: var(--text-muted); font-weight: bold; margin-bottom: 6px; }
+        .spec-item strong { font-size: 1.1rem; color: var(--text-dark); font-family: 'Noto Sans KR', sans-serif; font-weight: 700; word-break: break-all; }
 
         .game-title { font-family: 'Jua', sans-serif; font-size: 1.5rem; color: var(--text-dark); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
-        .game-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #e2e8f0; }
+        .game-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #e2e8f0; font-family: 'Noto Sans KR', sans-serif; }
         .game-row:last-child { border-bottom: none; }
-        .badge { padding: 6px 14px; border-radius: 50px; font-size: 0.9rem; font-weight: bold; }
+        .game-row span { font-weight: 500; }
+        .badge { padding: 6px 14px; border-radius: 50px; font-size: 0.85rem; font-weight: bold; font-family: 'Noto Sans KR', sans-serif; }
         .badge.쾌적 { background: #dcfce7; color: var(--accent-green); }
         .badge.보통 { background: #fef9c3; color: var(--accent-yellow); }
         .badge.불가 { background: #fee2e2; color: var(--accent-red); }
 
         .price-card { text-align: center; padding: 25px; border-radius: 20px; transition: all 0.3s; }
-        .price-card.개이득 { background: #f0fdf4; border: 2px solid var(--accent-green); }
-        .price-card.적당 { background: #fefce8; border: 2px solid var(--accent-yellow); }
-        .price-card.비씀 { background: #fff5f5; border: 2px solid var(--accent-red); }
-        .price-large { font-family: 'Jua', sans-serif; font-size: 2.2rem; margin: 10px 0; color: var(--text-dark); }
-        .comment-text { background: #ffffff; padding: 15px; border-radius: 12px; color: #475569; line-height: 1.6; border: 1px solid #e2e8f0; margin-top: 10px; font-weight: 500; }
+        .price-card.개이득 { background: #f0fdf4; border: 1px solid var(--accent-green); }
+        .price-card.적당 { background: #fefce8; border: 1px solid var(--accent-yellow); }
+        .price-card.비쌈 { background: #fff5f5; border: 1px solid var(--accent-red); }
+        .price-large { font-family: 'Jua', sans-serif; font-size: 2.3rem; margin: 10px 0; color: var(--text-dark); }
+        .comment-text { background: #ffffff; padding: 15px; border-radius: 12px; color: #475569; line-height: 1.6; border: 1px solid #e2e8f0; margin-top: 10px; font-weight: 500; font-size: 0.95rem; }
+        
+        .dc-drip-box { background: #f1f5f9; border-left: 5px solid #475569; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; font-size: 1.05rem; font-weight: bold; color: #1e293b; line-height: 1.5; }
 
         .btn-reset { width: 100%; background: #64748b; color: white; border: none; padding: 16px; border-radius: 16px; font-size: 1.2rem; font-family: 'Jua', sans-serif; cursor: pointer; margin-top: 25px; transition: background 0.2s; }
         .btn-reset:hover { background: #475569; }
 
-        /* 화면 전환 물방울 연출 */
-        .bubble { position: absolute; background: radial-gradient(circle at 30% 30%, rgba(56, 189, 248, 0.6), rgba(2, 132, 199, 0.1)); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); box-shadow: inset 0 0 8px rgba(255,255,255,0.6), 0 0 12px rgba(56,189,248,0.2); z-index: 9999; }
+        .bubble { position: absolute; background: radial-gradient(circle at 30% 30%, rgba(56, 189, 248, 0.8), rgba(2, 132, 199, 0.2)); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%) scale(1); box-shadow: inset 0 0 6px rgba(255,255,255,0.7), 0 0 10px rgba(56,189,248,0.3); z-index: 9999; }
     </style>
 </head>
 <body>
@@ -83,29 +174,26 @@
     <div class="container">
         <header>
             <div class="logo-container">
-                <span class="tube-graphic">🛟</span>
+                <div class="cartoon-tube"></div>
             </div>
-            <h1>컴맹 구조대</h1>
-            <p>중고 PC 매물 글을 복사해 붙여넣으세요. AI가 가성비를 구조합니다!</p>
+            <h1>컴맹 <span>구조대</span></h1>
+            <p>중고 PC 매물 글을 던져주세요. AI 구조대가 당신의 가성비를 구하러 갑니다!</p>
         </header>
 
-        <!-- 메인 입력 카드 -->
         <div class="card" id="formBox">
             <textarea id="pcText" placeholder="여기에 당근마켓이나 중고나라 판매글 내용을 그대로 복사해서 붙여넣어 주세요!&#10;예) CPU i5-12400F, RTX 3060, 램 16G 팝니다..."></textarea>
-            <button class="btn" onclick="startRescue()">🚀 구조대 출동 (감정 시작)</button>
+            <button class="btn" onclick="startRescue()"><span class="mini-tube"></span> 구조대 출동 (감정 시작)</button>
         </div>
 
-        <!-- 로딩 대시보드 -->
         <div class="card loading-box" id="loadingBox">
-            <div class="spinner"></div>
-            <h2 id="loadingText" style="color: var(--primary-color); font-family: 'Jua', sans-serif; font-size: 1.8rem;">AI 구조대 분석 데이터 수집 중...</h2>
+            <h2 id="loadingText" style="color: var(--primary-color); font-family: 'Jua', sans-serif; font-size: 1.7rem;">구조선 출항 완료! 엔진 시동 걸었습니다.</h2>
+            
             <div class="progress-container">
                 <div class="progress-bar" id="progressBar"></div>
             </div>
-            <div id="progressPercent" style="margin-top: 10px; font-weight: bold; color: var(--primary-color); font-size: 1.2rem;">0%</div>
+            <div id="progressPercent" style="margin-top: 15px; font-weight: bold; color: var(--primary-color); font-size: 1.3rem; font-family: 'Jua', sans-serif;">0%</div>
         </div>
 
-        <!-- 최종 결과 카드 -->
         <div class="result-box" id="resultBox">
             <div class="spec-grid">
                 <div class="spec-item"><span>중앙처리장치 (CPU)</span><strong id="resCpu">-</strong></div>
@@ -122,6 +210,7 @@
                 <h3 id="priceTitle" style="font-family: 'Jua', sans-serif; font-size: 1.4rem;">AI 가성비 최종 판정</h3>
                 <div class="price-large" id="normalPriceText">0원</div>
                 <p class="comment-text" id="priceComment">-</p>
+                <div class="dc-drip-box" id="dcDripText">-</div>
             </div>
 
             <button class="btn-reset" onclick="resetForm()">🔄 다른 매물 새로 감정하기</button>
@@ -131,12 +220,70 @@
     <script>
         let progressInterval;
 
+        // 🛠️ 교정: '비씀' 오타 전격 수정 및 판정당 2개씩 드립 추가 (총 30개 풀 가동)
+        const dripDatabase = {
+            "개이득": [
+                "이 가격이면 판매자가 대가리 총 맞았거나 자선사업가임ㅋㅋㅋㅋ",
+                "스펙 대비 가격 실화냐? 판매자 주소 물어보고 큰절 올리셈",
+                "치킨 몇 마리 번 수준이 아니라 고깃집 회식비 번 수준임",
+                "이거 안 사고 버티면 오늘 밤에 꿈자리 뒤숭숭할 듯ㅋㅋㅋㅋ",
+                "부품 하자가 없다면 광속으로 계좌 열고 송금하는 게 인지상정",
+                "진짜 시세보다 말도 안 되게 싸다ㅋㅋㅋ 눈 비비고 다시 봄",
+                "판매글 지워지기 전에 3분 안에 약속 잡고 뛰어 가라ㄹㅇ",
+                "간만에 가성비 제대로 터진 역대급 혜자 매물 등판했네",
+                "심봤다!! 주저하는 순간 다른 사람이 채가니까 앞만 보고 달려라",
+                "이건 중고나라가 아니라 당근 천사 마켓 수준임ㅋㅋㅋ 무조건 사셈"
+            ],
+            "적당": [
+                "딱 정직하게 중고 시장 국룰 시세대로 올렸네 무난무난함",
+                "안심하고 사도 됨. 적당히 감가 다 맞은 안정적인 가격",
+                "네고 2~3만 원 앙탈 부려보고 안 깎아줘도 걍 들고 올 만함",
+                "바가지도 아니고 혜자도 아님. 딱 대한민국 평균 가격대",
+                "업어가도 후회는 안 할 정직한 밥상 같은 가격이다 ㅇㅇ",
+                "더 싼 거 찾으려고 잠복하느니 걍 이거 사고 발 뻗는 게 나음",
+                "판매자가 시세 공부 꼼꼼하게 하고 올린 정석 매물임",
+                "적당히 조율해서 커피값 정도만 빼달라고 해보고 주워 오셈",
+                "가슴이 웅장해지진 않지만 산 뒤에 절대 후회는 안 할 정가 매물",
+                "시세 밀당의 고수가 올린 듯. 깎기도 애매하고 안 사기도 아까운 정가"
+            ],
+            "비쌈": [
+                "이 가격이면 걍 뜨끈하게 신품 부품 모아서 조립하는 게 개이득",
+                "가격을 보니 눈물이 앞을 가린다... 조금 많이 보태신 듯",
+                "판매자한테 가격 절충 물어보고 안 된다고 하면 쿨하게 패스해라",
+                "부품 연식에 비해 가격이 너무 꼿꼿하게 서 있어서 좀 아쉬움",
+                "이 돈 주고 중고 사기엔 억울하니까 뒤로가기 누르는 거 추천",
+                "조금만 네고 시도해 보고 철벽 치면 걍 다른 매물 알아보셈",
+                "시세보다 가격이 좀 떠 있네ㅋㅋㅋ 조용히 다른 글 보러 가자",
+                "가성비 구하러 왔다가 구조대도 당황하게 만드는 가격대임",
+                "판매자분 애정이 듬뿍 담겨서 중고가에 프리미엄이 붙었나 봄ㅋㅋㅋ",
+                "아직 세상 물정을 모르는 매물이네 굳이 총대 멜 필요 없다 패스!"
+            ]
+        };
+
+        function playWaterSound() {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const duration = 0.5;
+            for (let i = 0; i < 3; i++) {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400 + (i * 300), audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1500 + (i * 500), audioCtx.currentTime + duration);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            }
+        }
+
         function createBubbles() {
-            // 🎈 마음에 들어 하셨던 오리지널 물방울 폭사 연출 효과
-            for (let i = 0; i < 600; i++) {
+            playWaterSound();
+            for (let i = 0; i < 700; i++) {
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
-                const size = Math.random() * 25 + 5;
+                const size = Math.random() * 30 + 4; 
                 bubble.style.width = `${size}px`;
                 bubble.style.height = `${size}px`;
                 bubble.style.left = '50%';
@@ -144,13 +291,14 @@
                 document.body.appendChild(bubble);
                 
                 const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * window.innerWidth * 0.9;
+                const distance = Math.random() * Math.max(window.innerWidth, window.innerHeight) * 0.85;
                 const destX = Math.cos(angle) * distance;
                 const destY = Math.sin(angle) * distance;
-                const duration = Math.random() * 1.4 + 0.7;
+                const duration = 0.5;
                 
                 bubble.animate([
-                    { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                    { transform: 'translate(-50%, -50%) scale(0.3)', opacity: 1 },
+                    { transform: `translate(calc(-50% + ${destX}px), calc(-50% + ${destY}px)) scale(1.3)`, opacity: 0.9 },
                     { transform: `translate(calc(-50% + ${destX}px), calc(-50% + ${destY}px)) scale(0)`, opacity: 0 }
                 ], {
                     duration: duration * 1000,
@@ -176,27 +324,34 @@
 
             progressInterval = setInterval(() => {
                 if (percent < 96) {
-                    percent += Math.random() * 2;
+                    percent += Math.random() * 3;
                     if(percent > 96) percent = 96;
                     const rounded = Math.round(percent);
+                    
                     progressBar.style.width = `${rounded}%`;
                     progressPercent.innerText = `${rounded}%`;
 
-                    if(rounded > 70) loadingText.innerText = "시장 중고 시세 데이터 맵핑 중...";
-                    else if(rounded > 40) loadingText.innerText = "제미나이 AI 스펙 조합 연산 중...";
-                    else if(rounded > 15) loadingText.innerText = "텍스트 본문 하드웨어 파싱 중...";
+                    if(rounded >= 90) loadingText.innerText = "도착 직전입니다!! 조류가 거세니 꽉 잡으세요!";
+                    else if(rounded >= 70) loadingText.innerText = "구조대가 거친 파도를 헤치며 질주하는 중...";
+                    else if(rounded >= 40) loadingText.innerText = "구조선 풀 악셀! 거침없이 바다를 가르며 가고 있습니다!";
+                    else if(rounded >= 15) loadingText.innerText = "구조대가 배에 탑승하여 힘차게 출발했습니다!";
                 }
-            }, 70);
+            }, 80);
 
             try {
-                // 🚀 인터넷 구름 위 Render 백엔드 주소로 정확하게 매칭 완료!
-                const response = await fetch("https://com-rescue-backend.onrender.com/analyze", {
+                const response = await fetch("http://localhost:5000/analyze", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ text })
                 });
 
-                if (!response.ok) throw new Error("서버 에러 발생");
+                if (!response.ok) {
+                    clearInterval(progressInterval);
+                    alert("구조대가 좌표를 잘못 찍었습니다! (네트워크 오류)");
+                    resetForm();
+                    return;
+                }
+                
                 const data = await response.json();
 
                 clearInterval(progressInterval);
@@ -204,13 +359,13 @@
                 progressPercent.innerText = "100%";
                 
                 setTimeout(() => {
-                    createBubbles(); // 화면 전환 물방울쇼 가동
+                    createBubbles();
                     showResult(data);
-                }, 300);
+                }, 400);
 
             } catch (err) {
                 clearInterval(progressInterval);
-                alert("AI 서버 연결에 실패했거나 트래픽이 만료되었습니다. 잠시 후 다시 시도해 주세요!");
+                alert("구조대가 난파당했습니다! 컴퓨터 터미널 창을 확인해 주세요.");
                 resetForm();
             }
         }
@@ -238,11 +393,18 @@
             });
 
             const card = document.getElementById("priceCard");
-            card.className = `price-card ${data.priceAnalysis.priceStatus}`;
+            const status = data.priceAnalysis.priceStatus; 
+            card.className = `price-card ${status}`;
             
-            document.getElementById("priceTitle").innerText = `AI 가성비 최종 판정: [${data.priceAnalysis.priceStatus}]`;
+            document.getElementById("priceTitle").innerText = `AI 가성비 최종 판정: [${status}]`;
             document.getElementById("normalPriceText").innerText = `부품 적정가 합산: ${data.priceAnalysis.calculatedNormalPrice.toLocaleString()}원`;
             document.getElementById("priceComment").innerText = data.priceAnalysis.priceComment;
+
+            const dripBox = document.getElementById("dcDripText");
+            const pool = dripDatabase[status] || dripDatabase["적당"];
+            const randomDrip = pool[Math.floor(Math.random() * pool.length)];
+            
+            dripBox.innerHTML = `💬 <strong>한줄 요약</strong>: "${randomDrip}"`;
         }
 
         function resetForm() {
@@ -252,7 +414,7 @@
             document.getElementById("pcText").value = "";
             document.getElementById("progressBar").style.width = "0%";
             document.getElementById("progressPercent").innerText = "0%";
-            document.getElementById("loadingText").innerText = "AI 구조대 분석 데이터 수집 중...";
+            document.getElementById("loadingText").innerText = "구조선 출항 완료! 엔진 시동 걸었습니다.";
         }
     </script>
 </body>
